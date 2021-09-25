@@ -1,4 +1,5 @@
 // Object Literal
+// Problem : tidak efektif untuk objek yang banyak
 // let mahasiswa1 = {
 //   nama: 'Natura',
 //   energi: 10,
@@ -24,26 +25,37 @@
 // ======================================================
 
 // Function Declaration
-// function Mahasiswa(nama, energi) {
-//   let mahasiswa = {};
-//   mahasiswa.nama = nama;
-//   mahasiswa.energi = energi;
 
-//   mahasiswa.makan = function (porsi) {
-//     this.energi += porsi;
-//     console.log(`Halo ${this.nama}, Selamat makan!`);
-//   }
+const methodMahasiswa = {
+  makan: function (porsi) {
+    this.energi += porsi;
+    console.log(`Halo ${this.nama}, Selamat makan!`);
+  },
 
-//   mahasiswa.main = function (jam) {
-//     this.energi -= jam;
-//     console.log(`Halo ${this.nama}, selamat bermain!`);
-//   }
+  main: function (jam) {
+    this.energi -= jam;
+    console.log(`Halo ${this.nama}, selamat bermain!`);
+  },
 
-//   return mahasiswa;
-// }
+  tidur: function (jam) {
+    this.energi += jam * 2;
+    console.log(`Halo ${this.nama}, selamat tidur!`);
+  }
+};
 
-// let Natura = Mahasiswa('Natura', 10);
-// let Budi = Mahasiswa('Budi', 20);
+function Mahasiswa(nama, energi) {
+  let mahasiswa = {};
+  mahasiswa.nama = nama;
+  mahasiswa.energi = energi;
+  mahasiswa.makan = methodMahasiswa.makan;
+  mahasiswa.main = methodMahasiswa.main;
+  mahasiswa.tidur = methodMahasiswa.tidur;
+
+  return mahasiswa;
+}
+
+let Natura = Mahasiswa('Natura', 10);
+let Budi = Mahasiswa('Budi', 20);
 
 // tes on console
 // Natura
@@ -53,23 +65,23 @@
 // ======================================================
 
 // Constructor Function
-function Mahasiswa(nama, energi) {
-  this.nama = nama;
-  this.energi = energi;
+// function Mahasiswa(nama, energi) {
+//   this.nama = nama;
+//   this.energi = energi;
 
-  this.makan = function (porsi) {
-    this.energi += porsi;
-    console.log(`Halo ${this.nama}, Selamat makan!`);
-  }
+//   this.makan = function (porsi) {
+//     this.energi += porsi;
+//     console.log(`Halo ${this.nama}, Selamat makan!`);
+//   }
 
-  this.main = function (jam) {
-    this.energi -= jam;
-    console.log(`Halo ${this.nama}, selamat bermain!`);
-  }
-}
+//   this.main = function (jam) {
+//     this.energi -= jam;
+//     console.log(`Halo ${this.nama}, selamat bermain!`);
+//   }
+// }
 
 // keyword new
-let Natura = new Mahasiswa('Natura', 10);
+// let Natura = new Mahasiswa('Natura', 10);
 
 // tes on console
 // Natura
