@@ -26,33 +26,33 @@
 
 // Function Declaration
 
-const methodMahasiswa = {
-  makan: function (porsi) {
-    this.energi += porsi;
-    console.log(`Halo ${this.nama}, Selamat makan!`);
-  },
+// const methodMahasiswa = {
+//   makan: function (porsi) {
+//     this.energi += porsi;
+//     console.log(`Halo ${this.nama}, Selamat makan!`);
+//   },
 
-  main: function (jam) {
-    this.energi -= jam;
-    console.log(`Halo ${this.nama}, selamat bermain!`);
-  },
+//   main: function (jam) {
+//     this.energi -= jam;
+//     console.log(`Halo ${this.nama}, selamat bermain!`);
+//   },
 
-  tidur: function (jam) {
-    this.energi += jam * 2;
-    console.log(`Halo ${this.nama}, selamat tidur!`);
-  }
-};
+//   tidur: function (jam) {
+//     this.energi += jam * 2;
+//     console.log(`Halo ${this.nama}, selamat tidur!`);
+//   }
+// };
 
-function Mahasiswa(nama, energi) {
-  let mahasiswa = Object.create(methodMahasiswa);
-  mahasiswa.nama = nama;
-  mahasiswa.energi = energi;
+// function Mahasiswa(nama, energi) {
+//   let mahasiswa = Object.create(methodMahasiswa);
+//   mahasiswa.nama = nama;
+//   mahasiswa.energi = energi;
 
-  return mahasiswa;
-}
+//   return mahasiswa;
+// }
 
-let Natura = Mahasiswa('Natura', 10);
-let Budi = Mahasiswa('Budi', 20);
+// let Natura = Mahasiswa('Natura', 10);
+// let Budi = Mahasiswa('Budi', 20);
 
 // tes on console
 // Natura
@@ -62,23 +62,28 @@ let Budi = Mahasiswa('Budi', 20);
 // ======================================================
 
 // Constructor Function
-// function Mahasiswa(nama, energi) {
-//   this.nama = nama;
-//   this.energi = energi;
+function Mahasiswa(nama, energi) {
+  this.nama = nama;
+  this.energi = energi;
+}
 
-//   this.makan = function (porsi) {
-//     this.energi += porsi;
-//     console.log(`Halo ${this.nama}, Selamat makan!`);
-//   }
+Mahasiswa.prototype.makan = function (porsi) {
+  this.energi += porsi;
+  return `Halo ${this.nama}, selamat makan!`;
+}
 
-//   this.main = function (jam) {
-//     this.energi -= jam;
-//     console.log(`Halo ${this.nama}, selamat bermain!`);
-//   }
-// }
+Mahasiswa.prototype.main = function (jam) {
+  this.energi -= jam;
+  return `Halo ${this.nama}, selamat bermain!`;
+}
+
+Mahasiswa.prototype.tidur = function (jam) {
+  this.energi += jam * 2;
+  return `Halo ${this.nama}, selamat tidur!`;
+}
 
 // keyword new
-// let Natura = new Mahasiswa('Natura', 10);
+let Natura = new Mahasiswa('Natura', 10);
 
 // tes on console
 // Natura
