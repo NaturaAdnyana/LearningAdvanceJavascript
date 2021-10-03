@@ -2,6 +2,7 @@
 function ucapanSalam(waktu) {
   return function (nama) {
     console.log(`Halo ${nama}, selamat ${waktu}, semoga harimu menyenangkan!`);
+    // ${waktu} adalah closure, karena mengambil parameter dari luar function
   }
 }
 
