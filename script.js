@@ -12,5 +12,7 @@ let selamatSiang = ucapanSalam('siang');
 let selamatMalam = ucapanSalam('malam');
 
 selamatPagi('Natura');
-
 // Output : Halo Natura, selamat pagi, semoga harimu menyenangkan!
+
+console.dir(selamatPagi);
+// bisa dilihat didalam scope ada closure
