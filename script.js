@@ -19,8 +19,8 @@ const tampilSalam = (nama, waktu) => {
 }
 console.log(tampilSalam('Natura', 'Siang'));
 
-// Contoh arrow function yang lebih rumit
 
+// === Contoh arrow function yang lebih rumit ===
 let mahasiswa = ['Natura', 'Krisna', 'Deta', 'Astawa'];
 
 // v v v sebelum jadi arrow function (function expression) v v v
