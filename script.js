@@ -1,18 +1,35 @@
-// this function return function
-function ucapanSalam(waktu) {
-  return function (nama) {
-    console.log(`Halo ${nama}, selamat ${waktu}, semoga harimu menyenangkan!`);
-    // ${waktu} adalah closure, karena mengambil parameter dari luar function
-  }
-}
+// let add = function () {
+//   let counter = 0;
+//   // variabel counter disimpan didalam function, sehingga tidak terpengaruh oleh global
+//   return function () {
+//     return ++counter;
+//   };
+// }
 
-// function factories
-let selamatPagi = ucapanSalam('pagi');
-let selamatSiang = ucapanSalam('siang');
-let selamatMalam = ucapanSalam('malam');
+// counter = 10;
+// scope global mencoba mempengaruhi variabel counter
 
-selamatPagi('Natura');
-// Output : Halo Natura, selamat pagi, semoga harimu menyenangkan!
+// let a = add();
 
-console.dir(selamatPagi);
-// bisa dilihat didalam scope ada closure
+// console.log(a());
+// console.log(a());
+// console.log(a());
+
+// v v v v v v
+
+// Immediately Invoked Function (IIFE)
+let add = (function () {
+  // function dibungkus kurung, sehingga menjadi Immediately Invoked Function
+  let counter = 0;
+  // variabel counter disimpan didalam function, sehingga tidak terpengaruh oleh global
+  return function () {
+    return ++counter;
+  };
+})();
+// diakhir diisi kurung kosong
+
+counter = 10;
+// scope global mencoba mempengaruhi variabel counter
+
+console.log(add());
+console.log(add());
