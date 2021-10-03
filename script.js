@@ -1,39 +1,32 @@
-// === Jika sama sekali tidak punya parameter ===
-const tampilUcapan = () => `Hello World`;
-console.log(tampilUcapan());
+// Constructor Function
 
+// v v v sebelum menjadi arrow function v v v
+// const Mahasiswa = function () {
+//   this.nama = 'Natura';
+//   this.umur = 20;
+//   this.sayHello = function () {
+//     console.log(`Hello, nama saya ${this.nama}, dan saya ${this.umur} tahun.`);
+//   }
+// }
+// const Natura = new Mahasiswa;
 
-// === Jika parameter cuma 1 ===
-// const tampilNama = (nama) => { return `Halo, $(nama)`; }
-// console.log('Natura Adnyana');
-
-// v v v Bahkan bisa lebih ringkas v v v
-
-const tampilNama = nama => `Halo, $(nama)`;
-console.log('Natura Adnyana');
-
-
-// === Jika parameter lebih dari 1 ===
-const tampilSalam = (nama, waktu) => {
-  return `Selamat ${waktu}, ${nama}`;
-}
-console.log(tampilSalam('Natura', 'Siang'));
-
-
-// === Contoh arrow function yang lebih rumit ===
-let mahasiswa = ['Natura', 'Krisna', 'Deta', 'Astawa'];
-
-// v v v sebelum jadi arrow function (function expression) v v v
-// let jumlahHuruf = mahasiswa.map(function (nama) {
-//   return nama.length;
-// });
-// console.log(jumlahHuruf);
 
 // v v v sesudah menjadi arrow function v v v
-// let jumlahHuruf = mahasiswa.map(nama => nama.length);
-// console.log(jumlahHuruf);
 
-// v v v jika ingin mengembalikan objek v v v
-// let jumlahHuruf = mahasiswa.map(nama => ({ nama: nama, jumlahHuruf: nama.length }));
-let jumlahHuruf = mahasiswa.map(nama => ({ nama, jumlahHuruf: nama.length }));
-console.table(jumlahHuruf);
+// arrow function tidak mengenal this, jadi hanya bisa diterapkan pada method
+// jika dipaksa, maka scope arrow function akan mencari keluar ke global sehingga this. menjadi window.
+const Mahasiswa = function () {
+  this.nama = 'Natura';
+  this.umur = 20;
+  this.sayHello = () => {
+    console.log(`Hello, nama saya ${this.nama}, dan saya ${this.umur} tahun.`);
+  }
+
+  // Ini wajib menggunakan arrow function agar tidak hoisting
+  setInterval(() => {
+    console.log(this.umur++);
+    // Karena arrow function tidak mengenal this, maka this.umur++ akan mencari keluar ke parentnya
+  }, 5000);
+
+}
+const Natura = new Mahasiswa;
