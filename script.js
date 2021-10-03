@@ -1,31 +1,21 @@
-const box = document.querySelector('.box');
-box.addEventListener('click', function () {
-  // function ada event tidak bisa diubah ke arrow
-  console.log(this);
+// Higher Order Function adalah function yang mengambil function didalamnya
+const angka = [-1, 8, 9, 1, 4, -5, -4, 3, 2, 9];
 
-  let satu = 'size';
-  let dua = 'caption';
+// v v v Sebelum menggunakan filter v v v
 
-  // untuk menukar alur toggle
-  if (this.classList.contains(satu)) {
-    [satu, dua] = [dua, satu];
-  }
+// const angkaLebihDariTiga = [];
+// for (let i = 0; i < angka.length; i++) {
+//   if (angka[i] >= 3) {
+//     angkaLebihDariTiga.push(angka[i]);
+//   }  
+// }
+// console.log(angkaLebihDariTiga);
 
-  // toggle class size
-  this.classList.toggle(satu);
 
-  // toggle class caption
-  // function pada setTimeout akan hoisting, sehingga this yang ditangkap adalah global/window
-  // setTimeout(function () {
-  //   this.classList.toggle('caption');
-  //   console.log(this);
-  // }, 600);
+// v v v Setelah menggunakan filter v v v
 
-  //  v v v solusinya adalah dengan menggunakan arrow function v v v
-
-  setTimeout(() => {
-    // setTimeout akan hoisting, sehingga this yang ditangkap adalah global/window
-    this.classList.toggle(dua);
-    console.log(this);
-  }, 600);
-})
+// const newAngka = angka.filter(function (a) {
+//   return a >= 3;
+// });
+const newAngka = angka.filter(a => a >= 3);
+console.log(newAngka);
