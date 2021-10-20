@@ -1,37 +1,97 @@
-// Higher Order Function adalah function yang mengambil function didalamnya
+// I didn't know, it can be use for Embedded Expressions
+const x = 10;
+console.log(`${(x % 2 == 0) ? 'genap' : 'ganjil'}`);
 
-// ambil semua elemen video
-const videos = Array.from(document.querySelectorAll('[data-duration]'));
+// can be use for loop data
+const mhs = [
+  {
+    nama: 'Natura Adnyana',
+    email: 'natura@gmail.com'
+  },
+  {
+    nama: 'Ntah Siapa',
+    email: 'siapa@gmail.com'
+  },
+  {
+    nama: 'Orang Gakenal',
+    email: 'gakenal@gmail.com'
+  }
+];
 
-// yang dipilih hanya Javascript Lanjutan
-let jsLanjut = videos.filter(video => video.textContent.includes("JAVASCRIPT LANJUTAN"))
+const el = `
+  <div class="mhs">
+    ${mhs.map(m => `
+      <ul>
+        <li>${m.nama}</li>
+        <li>${m.email}</li>
+      </ul>
+    `).join('')}
+  </div>
+`;
+// add 'join method' so comma will not appear while mhs loop on HTML
 
-// menerapkan method chaining
-// ambil durasi masing-masing video
-  .map(item => item.dataset.duration)
+document.body.innerHTML = el;
 
-// ubah durasi dari string menjadi float, ubah menit menjadi detik
-  .map(waktu => {
-    // 10:30 -> [10, 30] split
-    // parseFloat -> ubah string menjadi float
-    const parts = waktu.split(':').map(part=> parseFloat(part));
-    return (parts[0] * 60) + parts[1];
-  })
+// ========================================
 
-// jumlahkan semua detiknya
-  .reduce((total, detik) => total + detik);
+// condisional ternary
+// if statement
 
-// ubah formatnya jadi jam menit detik
-const jam = Math.floor(jsLanjut / 3600);
-jsLanjut = jsLanjut - jam * 3600;
-const menit = Math.floor(jsLanjut / 60);
-const detik = jsLanjut - menit * 60;
+const lagu = {
+  judul: 'Tetap dalam jiwa',
+  penyanyi: 'Isyana Saraswati',
+  feat: 'jika ada feat'
+}
 
-// simpan di DOM
-const pDurasi = document.querySelector('.total-durasi');
-pDurasi.textContent = `${jam} jam, ${menit} menit, ${detik} detik`;
+const el2 = `
+  <div class="lagu">
+    <ul>
+      <li>${lagu.penyanyi}</li>
+      <li>
+        ${lagu.judul}
+        ${lagu.feat ? `(feat. ${lagu.feat})` : ''}
+      </li>
+    </ul>
+  </div>
+`;
 
-const jumlahVideo = videos.filter(video => video.textContent.includes("JAVASCRIPT LANJUTAN")).length;
+document.body.innerHTML = el2;
 
-const pJumlahVideo = document.querySelector('.jumlah-video');
-pJumlahVideo.textContent = `${jumlahVideo} video`;
+// ===================================
+// Nested
+// HTML fragment bersarang
+
+const dataMhs = {
+  nama: 'Natura Adnyana',
+  semester: 5,
+  mataKuliah: [
+    'Web Framework',
+    'Desain Web',
+    'Objek Orientasi Analisis dan Desain',
+    'Tata Kelola dan Audit'
+  ]
+};
+
+const cetakMataKuliah = (mataKuliah) => {
+  return `
+    <ol>
+      ${mataKuliah.map(mk => `
+        <li>
+          ${mk}
+        </li>
+      `).join('')}
+    </ol>
+  `
+  // ada join function untuk menghilangkan tanda koma setiap looping objek
+}
+
+const el3 = `
+  <div class="dataMhs">
+    <h2>${dataMhs.nama}</h2>
+    <span class="semester">Semester : ${dataMhs.semester}</span>
+    <h4>Mata Kuliah :</h4>
+    ${cetakMataKuliah(dataMhs.mataKuliah)}
+  </div>
+`
+
+document.body.innerHTML = el3;
