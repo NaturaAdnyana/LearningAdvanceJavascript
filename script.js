@@ -1,89 +1,58 @@
-// Destructuring Variables / Assignment
+// Destructuring Function
 
-// Destructuring array
-const perkenalan = ["Hallo", "nama", "saya", "Natura Adnyana"];
-// normal items
-// const [salam, satu, dua, nama] = perkenalan;
-// skipping items
-const [salam, , , nama] = perkenalan;
-console.log(nama);
+function kalkulasi(a, b) {
+  return [a + b, a - b, a * b, a / b];
+}
 
-// swap items
-let a = 1;
-let b = 2;
-console.log(a);
-console.log(b);
-// this is swap
-[a, b] = [b, a]
-console.log(a);
-console.log(b);
+// before
+// const jumlah = kalkukasi(2, 3)[0]; //output 5
+// const kali = kalkukasi(2, 3)[1]; //output 6
 
-// destructuring variables can be implemented on function
-const coba = () => {
-  return [3, 4];
-}
-// destructuring
-const [c, d] = coba();
-console.log(c);
+// after
+const [jumlah, kurang, kali, bagi, sisaBagi = "tidak difunction"] = kalkulasi(2, 3);
 
-// Rest parameter
-const [e, ...values] = [5, 6, 7, 8, 9];
-// ...values return new array
-console.log(e);
-console.log(values);
+console.log(jumlah);
+console.log(kali);
+console.log(sisaBagi);
 
-// destructuring object
-const petDog = {
-  namaAnjing: "Chika",
-  umur: 20
-}
-const {namaAnjing, umur} = petDog;
-console.log(namaAnjing);
-// vvv can be simplified like this (without declare object)
-({ namaKucing, warna } = {
-  namaKucing: "Choco",
-  warna: "coklat"
-})
-console.log(warna);
-// vvv you can change variables name by using :
-const myPhone = {
-  phoneMerk: "Asus",
-  phoneEdition: "Zenfone 3 Max"
-}
-const { phoneMerk: f, phoneEdition: g } = myPhone;
-console.log(f);
-// vvv you can put default variables
-const myShirt = {
-  shirtMerk: "Nike",
-  shirtSize: "M",
-  shirtColor: "White",
-  shirtMaterial: "Cotton"
-}
-const { 
-  shirtMerk, //normal
-  shirtSize: size, //changed variable name
-  shirtColor = "default-black", // added default value
-  shirtMaterial: material = "default-hyget" //changed variable name & added default value
-} = myShirt;
-console.log(material);
+// ===========================================================
 
-// rest parameter (now with object)
-const myCar = {
-  carName: "Every",
-  carEngine: "Matic",
-  carColor: "Silver"
+// Destructuring function, but return object
+function kalkulasiObjek(a, b) {
+  return {
+    tambahin: a + b,
+    kurangin: a - b,
+    kaliin: a * b,
+    bagiin: a / b
+  }
 }
-const { carName, ...carComponent } = myCar;
-// ...carComponent will return new object
-console.log(carComponent);
 
-// you can take one of object and send it as parameter into a function
-const softDrink = {
-  id: 12,
-  softDrinkName: 'Sprite',
-  softDrinkVol: '390ml'
+const { bagiin, kaliin, kurangin, tambahin } = kalkulasiObjek(2, 4);
+// you can randomize sort of object
+
+console.log(kurangin);
+
+// =============================================
+
+// before
+function cetakMhs(mhs) {
+  return `Halo, nama saya ${mhs.nama}, sata berumur ${mhs.umur} tahun.`
 }
-const getIdSoftDrink = ({ id }) => {
-  return id;
+// after
+function cetakPenduduk({ nama, umur, email: {primaryEmail} }) {
+  // you can declare object inside object
+  return `Atas nama ${nama}, berumur ${umur} tahun, email anda ${primaryEmail} telah dicek dan akan dipanggil FBI`
 }
-console.log(getIdSoftDrink(softDrink));
+
+// object variable
+const dataNatura = {
+  nama: "Natura Adnyana",
+  umur: "20",
+  email: {
+    primaryEmail: "natura@gmail.com",
+    secondaryEmail: "natkun@gmail.com",
+  }
+}
+
+console.log(cetakMhs(dataNatura));
+console.log(cetakPenduduk(dataNatura));
