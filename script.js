@@ -1,58 +1,51 @@
-// Destructuring Function
-
-function kalkulasi(a, b) {
-  return [a + b, a - b, a * b, a / b];
+// 1. Array is iterable
+const mhs = ["Natura", "siapa", "gatau"];
+for (const m of mhs) {
+  console.log(m);
 }
 
-// before
-// const jumlah = kalkukasi(2, 3)[0]; //output 5
-// const kali = kalkukasi(2, 3)[1]; //output 6
+// 2. String also iterable
+const nama = "Natura";
+for (const n of nama) {
+  console.log(n);
+}
 
-// after
-const [jumlah, kurang, kali, bagi, sisaBagi = "tidak difunction"] = kalkulasi(2, 3);
+// 3. For..of can't get each index in array, it need .entries method
+for (const [i, m] of mhs.entries()) {
+  console.log(`${m} adalah mahasiswa ke-${i + 1}`);
+}
+// vvv but if use forEach, it's more easy vvv
+mhs.forEach((m, i) => {
+  console.log(`${m} adalah mahasiswa ke-${i + 1}`)
+})
 
-console.log(jumlah);
-console.log(kali);
-console.log(sisaBagi);
+// 4. NodeList is also iterable
+const liNama = document.querySelectorAll(".nama");
+// before use for..of (forEach)
+liNama.forEach(n => console.log(n.textContent));
+// after use for..of
+for (const n of liNama) {
+  console.log(n.innerHTML);
+}
 
-// ===========================================================
-
-// Destructuring function, but return object
-function kalkulasiObjek(a, b) {
-  return {
-    tambahin: a + b,
-    kurangin: a - b,
-    kaliin: a * b,
-    bagiin: a / b
+// 5. Arguments also iterable
+function jumlahkanAngka() {
+  let jumlah = 0;
+  for (const a of arguments) {
+      jumlah += a
   }
+  return jumlah;
 }
 
-const { bagiin, kaliin, kurangin, tambahin } = kalkulasiObjek(2, 4);
-// you can randomize sort of object
+console.log(jumlahkanAngka(1, 2, 3, 4, 5))
 
-console.log(kurangin);
+// 6. BUT, object is not iterable, so we can use FOR..IN
+const warga =  {
+  nama: 'Natura',
+  umur: 20,
+  email: 'natura538@gmail.com'
+} 
 
-// =============================================
-
-// before
-function cetakMhs(mhs) {
-  return `Halo, nama saya ${mhs.nama}, sata berumur ${mhs.umur} tahun.`
+for (const w in warga) {
+  console.log(warga[w]);
 }
-// after
-function cetakPenduduk({ nama, umur, email: {primaryEmail} }) {
-  // you can declare object inside object
-  return `Atas nama ${nama}, berumur ${umur} tahun, email anda ${primaryEmail} telah dicek dan akan dipanggil FBI`
-}
-
-// object variable
-const dataNatura = {
-  nama: "Natura Adnyana",
-  umur: "20",
-  email: {
-    primaryEmail: "natura@gmail.com",
-    secondaryEmail: "natkun@gmail.com",
-  }
-}
-
-console.log(cetakMhs(dataNatura));
-console.log(cetakPenduduk(dataNatura));
