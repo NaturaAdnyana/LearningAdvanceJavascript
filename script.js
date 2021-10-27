@@ -1,51 +1,54 @@
-// 1. Array is iterable
-const mhs = ["Natura", "siapa", "gatau"];
-for (const m of mhs) {
-  console.log(m);
+// Spread Operator
+// Memecah iterables menjadi single element
+
+// 1. for String
+const me = "Natura";
+console.log(...me);
+
+// 2. for Array
+const warga = ['Natura', 'Ntah', 'Siapa'];
+console.log(...warga);
+
+// =====================================================================
+
+// You can combine 2 array
+const mhs = ['Natura', 'Ngurah', 'Marcell'];
+const dosen = ['Bapak', 'Ibu', 'Killer'];
+
+// before use spread operator
+const wargaKampus1 = mhs.concat(dosen);
+
+// after use spread operator (even we can put new value in middle of it)
+const wargaKampus2 = [...mhs, 'Anji', ...dosen];
+
+console.log(wargaKampus2)
+
+// ===============================================================
+// You can copying into new variable
+const myDog = ['Chika', 'Poko', 'Mochi'];
+
+const naturasDog = myDog; // ❌ don't do this 
+const asrisDog = [...myDog]; // 💯 do this
+
+naturasDog[0] = 'Peko'; // myDog will be change too
+asrisDog[0] = 'Pao'; // myDog will not change
+
+console.log(`${myDog} (My Dog)`);
+console.log(`${naturasDog} (Natura's Dog)`);
+console.log(`${asrisDog} (Asri's Dog)`);
+
+// ===============================================================
+// What if data is from nodeList?
+const liMhs = document.querySelectorAll('li');
+
+// before use spread operator
+const arrayMhs = [];
+for (let i = 0; i < liMhs.length; i++) {
+  arrayMhs.push(liMhs[i].textContent);  
 }
 
-// 2. String also iterable
-const nama = "Natura";
-for (const n of nama) {
-  console.log(n);
-}
+// after use spread operator
+const arraySpreadMhs = [...liMhs].map(m => m.textContent);
 
-// 3. For..of can't get each index in array, it need .entries method
-for (const [i, m] of mhs.entries()) {
-  console.log(`${m} adalah mahasiswa ke-${i + 1}`);
-}
-// vvv but if use forEach, it's more easy vvv
-mhs.forEach((m, i) => {
-  console.log(`${m} adalah mahasiswa ke-${i + 1}`)
-})
-
-// 4. NodeList is also iterable
-const liNama = document.querySelectorAll(".nama");
-// before use for..of (forEach)
-liNama.forEach(n => console.log(n.textContent));
-// after use for..of
-for (const n of liNama) {
-  console.log(n.innerHTML);
-}
-
-// 5. Arguments also iterable
-function jumlahkanAngka() {
-  let jumlah = 0;
-  for (const a of arguments) {
-      jumlah += a
-  }
-  return jumlah;
-}
-
-console.log(jumlahkanAngka(1, 2, 3, 4, 5))
-
-// 6. BUT, object is not iterable, so we can use FOR..IN
-const warga =  {
-  nama: 'Natura',
-  umur: 20,
-  email: 'natura538@gmail.com'
-} 
-
-for (const w in warga) {
-  console.log(warga[w]);
-}
+console.log(arrayMhs);
+console.log(arraySpreadMhs);
