@@ -1,54 +1,52 @@
-// Spread Operator
-// Memecah iterables menjadi single element
+// Rest Parameter
 
-// 1. for String
-const me = "Natura";
-console.log(...me);
-
-// 2. for Array
-const warga = ['Natura', 'Ntah', 'Siapa'];
-console.log(...warga);
-
-// =====================================================================
-
-// You can combine 2 array
-const mhs = ['Natura', 'Ngurah', 'Marcell'];
-const dosen = ['Bapak', 'Ibu', 'Killer'];
-
-// before use spread operator
-const wargaKampus1 = mhs.concat(dosen);
-
-// after use spread operator (even we can put new value in middle of it)
-const wargaKampus2 = [...mhs, 'Anji', ...dosen];
-
-console.log(wargaKampus2)
-
-// ===============================================================
-// You can copying into new variable
-const myDog = ['Chika', 'Poko', 'Mochi'];
-
-const naturasDog = myDog; // ❌ don't do this 
-const asrisDog = [...myDog]; // 💯 do this
-
-naturasDog[0] = 'Peko'; // myDog will be change too
-asrisDog[0] = 'Pao'; // myDog will not change
-
-console.log(`${myDog} (My Dog)`);
-console.log(`${naturasDog} (Natura's Dog)`);
-console.log(`${asrisDog} (Asri's Dog)`);
-
-// ===============================================================
-// What if data is from nodeList?
-const liMhs = document.querySelectorAll('li');
-
-// before use spread operator
-const arrayMhs = [];
-for (let i = 0; i < liMhs.length; i++) {
-  arrayMhs.push(liMhs[i].textContent);  
+function myFunc(a, b, ...myArgs) {
+  return `a = ${a}, b = ${b}, the rest = ${myArgs}`;
+  // myArgc will return array
 }
 
-// after use spread operator
-const arraySpreadMhs = [...liMhs].map(m => m.textContent);
+console.log(myFunc(1,2,3,4,5));
 
-console.log(arrayMhs);
-console.log(arraySpreadMhs);
+// ==========================================================
+
+// So we can sum the parameters really easy
+
+function jumlahAngka(...angka) {
+  return angka.reduce((a, b) => a + b);
+}
+
+console.log("The total is " + jumlahAngka(1,2,3,4,5));
+
+// ==========================================================
+
+// Its very useful for array destructuring too
+
+const kelompok1 = ['Natura', 'Si Wakil', 'Kang Makan', 'Kang Gosip', 'Si Males'];
+const [ketua, wakil, ...anggota] = kelompok1;
+
+console.log("Para Beban : " + anggota);
+
+// ==========================================================
+
+// It's also works for object destruction
+
+const projectTeam = {
+  pm: "Natura",
+  fe1: "Deta",
+  fe2: "Astawa",
+  be1: "Doni",
+  ux: "Arya",
+  do: "Krisna"
+}
+
+const { pm, ...myTeam } = projectTeam;
+console.table(myTeam);
+
+// ==========================================================
+
+// We also can filter like this
+function filterBy(tipe, ...data) {
+  return data.filter(d => typeof d === tipe);
+}
+
+console.log(filterBy('number', 1, 87, 'Natura', false, 12, true, 'Bali'));
