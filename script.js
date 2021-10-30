@@ -1,52 +1,43 @@
-// Rest Parameter
+// Callback
+// Synchronous Callback
 
-function myFunc(a, b, ...myArgs) {
-  return `a = ${a}, b = ${b}, the rest = ${myArgs}`;
-  // myArgc will return array
+// function halo(nama) {
+//   alert(`Halo, ${nama}`);
+// }
+
+// function tampilkanPesan(callback) {
+//   const nama = prompt('Masukan nama : ');
+//   callback(nama);
+// }
+
+// tampilkanPesan(halo);
+
+// Asynchronous Callback
+function getDataMahasiswa(url, success, error) {
+  let xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        success(xhr.response);
+      }
+      else if (xhr.status === 404) {
+        error();
+      }
+    }
+  }
+  xhr.open('get', url);
+  xhr.send();
 }
 
-console.log(myFunc(1,2,3,4,5));
+console.log('start');
 
-// ==========================================================
+getDataMahasiswa('data/data.json', results => {
+  // console.log(JSON.parse(results));
+  const mhs = JSON.parse(results);
+  mhs.forEach(m => console.log(m.nama));
+}, () => {
 
-// So we can sum the parameters really easy
+})
 
-function jumlahAngka(...angka) {
-  return angka.reduce((a, b) => a + b);
-}
-
-console.log("The total is " + jumlahAngka(1,2,3,4,5));
-
-// ==========================================================
-
-// Its very useful for array destructuring too
-
-const kelompok1 = ['Natura', 'Si Wakil', 'Kang Makan', 'Kang Gosip', 'Si Males'];
-const [ketua, wakil, ...anggota] = kelompok1;
-
-console.log("Para Beban : " + anggota);
-
-// ==========================================================
-
-// It's also works for object destruction
-
-const projectTeam = {
-  pm: "Natura",
-  fe1: "Deta",
-  fe2: "Astawa",
-  be1: "Doni",
-  ux: "Arya",
-  do: "Krisna"
-}
-
-const { pm, ...myTeam } = projectTeam;
-console.table(myTeam);
-
-// ==========================================================
-
-// We also can filter like this
-function filterBy(tipe, ...data) {
-  return data.filter(d => typeof d === tipe);
-}
-
-console.log(filterBy('number', 1, 87, 'Natura', false, 12, true, 'Bali'));
+console.log('end');
